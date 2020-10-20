@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yadanoa.dayadan.mapper.RepertoryServiceMapper">
+    <resultMap id="BaseResultMap_New" type="com.yadanoa.dayadan.entity.RepertoryLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="user_id" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="addCount" property="addCount" jdbcType="INTEGER"/>
+        <result column="cutKdCount" property="cutKdCount" jdbcType="INTEGER"/>
+        <result column="cutQpCount" property="cutQpCount" jdbcType="INTEGER"/>
+        <result column="createDate" property="createDate" jdbcType="VARCHAR"/>
+        <result column="repertoryNum" property="repertoryNum" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getAllRepetoryLogs" resultMap="BaseResultMap_New" >
+       select * from RepertoryLog	ORDER BY createDate DESC LIMIT #{pageNum} ,#{pageSize}
+    </select>
+
+    <select id="getNowRepetoryCount" resultType="integer" >
+        select repertory_count from Repertory;
+    </select>
+
+    <insert id="insertRepetoryLog" parameterMap="com.yadanoa.dayadan.entity.RepertoryLog" >
+        insert into RepertoryLog (user_id,type,addCount,cutKdCount,cutQpCount,createDate,repertoryNum)
+        values (#{user_id},#{type},#{addCount},#{cutKdCount},#{cutQpCount},#{createDate},#{repertoryNum})
+    </insert>
+
+
+</mapper>

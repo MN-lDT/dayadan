@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yadanoa.dayadan.mapper.RoleServiceMapper">
+    <resultMap id="BaseResultMap_New" type="com.yadanoa.dayadan.entity.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertUserRole">
+        insert into user_role('user_id','role_id')
+        values (#{userId},3);
+    </insert>
+
+    <select id="getRoleInfoByUserName" resultMap="BaseResultMap_New" parameterType="String">
+        SELECT role.*
+        FROM
+        user LEFT JOIN user_role ON user.id = user_role.user_id
+        LEFT JOIN role ON user_role.role_id = role.id
+        WHERE
+        user.username = #{username};
+    </select>
+
+</mapper>

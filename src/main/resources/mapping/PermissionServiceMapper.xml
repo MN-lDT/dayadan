@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yadanoa.dayadan.mapper.PermissionServiceMapper">
+    <resultMap id="BaseResultMap_New" type="com.yadanoa.dayadan.entity.Permission">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="getPermissionsByRoleId"  resultMap="BaseResultMap_New" parameterType="Integer">
+        SELECT
+            permission.*
+        FROM
+            permission
+            LEFT JOIN role_permission ON permission.id = role_permission.permission
+            LEFT JOIN role ON role_permission.role_id = role.id
+        WHERE
+	    role.id = #{role_id}
+    </select>
+
+</mapper>
