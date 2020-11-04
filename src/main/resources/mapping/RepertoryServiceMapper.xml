@@ -20,7 +20,7 @@
         select repertory_count from Repertory;
     </select>
 
-    <insert id="insertRepetoryLog" parameterMap="com.yadanoa.dayadan.entity.RepertoryLog" >
+    <insert id="insertRepetoryLog" parameterType="com.yadanoa.dayadan.entity.RepertoryLog" >
         insert into RepertoryLog (user_id,type,addCount,cutKdCount,cutQpCount,createDate,repertoryNum)
         values (#{user_id},#{type},#{addCount},#{cutKdCount},#{cutQpCount},#{createDate},#{repertoryNum})
     </insert>
